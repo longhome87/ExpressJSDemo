@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  h3 User List
+  h2 #{data.title}
+  |
+  table
+    tr
+      th Id
+      th Name
+    each u in data.users
+      tr
+        td #{u.id}
+        td #{u.name}
+  

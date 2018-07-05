@@ -1,0 +1,75 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+.logo {
+  float: left;
+}
+
+.cart {
+  float: right;
+}
+
+.menu-bar {
+  clear: both;
+  background-color: #008CBA;
+  color: white;
+  padding: 14px 16px;
+}
+
+.product-item-container {
+  float: left;
+  padding: 0 !important;
+}
+
+.product-item {
+  background-color: #f3f3f3;
+}
+
+.product-item-name {
+  text-transform: uppercase;
+}
+
+div img {
+  width: 100%;
+  height: 100%;
+}
+
+.copyright {
+  clear: both;
+  float: right;
+}
+
+.thumbnail {
+  margin: 10px;
+  padding: 10px;
+  background-color: #f3f3f3;
+}
+
+.thumbnail .description {
+  height: 100px;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 16px;
+}
