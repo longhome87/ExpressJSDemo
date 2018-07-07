@@ -1,9 +1,20 @@
 var config = require('config');
-var connectionString = config.get('dbConfig.connectionString');
+var connectionString = function () {
+    switch (process.env.NODE_ENV) {
+        case 'development':
+            var development = config.get('dbConfig.development');
+            return development;
+        case 'production':
+            var production = config.get('dbConfig.production');
+            return production;
+        default:
+            return null;
+    }
+}
 
 const { Pool } = require('pg');
 const pool = new Pool({
-    connectionString: connectionString
+    connectionString: connectionString()
 });
 
 module.exports = {
