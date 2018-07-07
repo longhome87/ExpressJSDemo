@@ -1,0 +1,5 @@
+{
+    "dbConfig": {
+        "connectionString": "postgresql://postgres:postgres@localhost:5432/minishop"
+    }
+}

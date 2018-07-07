@@ -1,11 +1,9 @@
-const { Pool } = require('pg');
+var config = require('config');
+var connectionString = config.get('dbConfig.connectionString');
 
+const { Pool } = require('pg');
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'minishop',
-    password: '',
-    port: 5432,
+    connectionString: connectionString
 });
 
 module.exports = {
