@@ -9,4 +9,18 @@ block content
     br
     input(class='form-control' type='text' name='txtDescription' placeholder='Description')
     br
+    .input-group.image-preview
+      input.form-control.image-preview-filename(type='text', disabled='disabled')
+      // don't give a name === doesn't send on POST/GET
+      span.input-group-btn
+        // image-preview-clear button
+        button.btn.btn-default.image-preview-clear(type='button', style='display:none;')
+          span.glyphicon.glyphicon-remove
+          |  Clear
+        // image-preview-input
+        .btn.btn-default.image-preview-input
+          span.glyphicon.glyphicon-folder-open
+          span.image-preview-input-title Browse
+          input(type='file', accept='image/png, image/jpeg, image/gif', name='input-file-preview')
+          // rename it
     input(class='btn btn-success' type='submit' name='btnAdd' value='Add')

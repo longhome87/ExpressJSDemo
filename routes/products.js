@@ -2,6 +2,18 @@ var express = require('express');
 var router = express.Router();
 const db = require('../db');
 const TABLE = require('../common');
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+const upload = multer({
+  storage: storage
+});
 
 router.get('/', function (req, res, next) {
   var query = "SELECT * FROM " + TABLE.Product + " ORDER BY Id";
@@ -10,7 +22,9 @@ router.get('/', function (req, res, next) {
       return next(err);
     }
 
-    res.render('products/index', { result });
+    res.render('products/index', {
+      result
+    });
   });
 });
 
@@ -18,13 +32,13 @@ router.get('/add', function (req, res, next) {
   res.render('products/add');
 });
 
-router.post('/add', function (req, res, next) {
+router.post('/add', upload.single('productImage'), function (req, res, next) {
   var name = req.body.txtName;
   var price = req.body.txtPrice;
   var description = req.body.txtDescription;
 
-
   var query = "INSERT INTO " + TABLE.Product + "(name, price, description) VALUES('" + name + "'," + price + ",'" + description + "')";
+  console.log(query);
   db.query(query, (err, result) => {
     if (err) {
       return next(err);
@@ -41,7 +55,9 @@ router.get('/edit/:id', function (req, res, next) {
       return next(err);
     }
 
-    res.render('products/edit', { product: result.rows[0] });
+    res.render('products/edit', {
+      product: result.rows[0]
+    });
   })
 });
 

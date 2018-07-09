@@ -2,13 +2,11 @@ var config = require('config');
 var connectionString = function () {
     switch (process.env.NODE_ENV) {
         case 'development':
-            var development = config.get('dbConfig.development');
-            return development;
+            return config.get('dbConfig.development');
         case 'production':
-            var production = config.get('dbConfig.production');
-            return production;
+            return config.get('dbConfig.production');
         default:
-            return null;
+            return config.get('dbConfig.development');
     }
 }
 
