@@ -7,7 +7,7 @@ block content
     each row in result.rows
       div.product-item-container.col-xl-3.col-lg-4.col-md-6
         div(class='thumbnail')
-          img(class='img-thumbnail' src='images/product-icon.png')
+          img(class='img-thumbnail' src='public/uploads/' + row.image_name)
           div(class='caption')
             h3 #{row.name}
             p(class='description') #{row.description}

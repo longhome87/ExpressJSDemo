@@ -2,25 +2,25 @@ extends ../layout
 
 block content
   h3 Add Product
-  form(class='form-group col-sm-10 col-md-8 col-lg-6 col-xl-6' method='POST' enctype='application/x-www-form-urlencoded')
+  form(class='form-group col-sm-10 col-md-8 col-lg-6 col-xl-6' method='POST' enctype='multipart/form-data')
     input(class='form-control' type='text' name='txtName' placeholder='Name')
     br
     input(class='form-control' type='number' name='txtPrice' placeholder='Price')
     br
     input(class='form-control' type='text' name='txtDescription' placeholder='Description')
     br
-    .input-group.image-preview
-      input.form-control.image-preview-filename(type='text', disabled='disabled')
-      // don't give a name === doesn't send on POST/GET
-      span.input-group-btn
-        // image-preview-clear button
-        button.btn.btn-default.image-preview-clear(type='button', style='display:none;')
-          span.glyphicon.glyphicon-remove
-          |  Clear
-        // image-preview-input
-        .btn.btn-default.image-preview-input
-          span.glyphicon.glyphicon-folder-open
-          span.image-preview-input-title Browse
-          input(type='file', accept='image/png, image/jpeg, image/gif', name='input-file-preview')
-          // rename it
+    input(class='form-control' type='file' id='txtFile' name='txtFile' accept='image/png, image/jpeg, image/gif')
+    br
+    img(class='image-preview form-control' id='imagePreview' name='imagePreview' hidden)
+    br
     input(class='btn btn-success' type='submit' name='btnAdd' value='Add')
+  script.
+    document.getElementById('txtFile').onchange = function() {
+      var reader = new FileReader();
+      reader.readAsDataURL(this.files[0]);
+      reader.onload = function(e) {
+        var imagePreview = document.getElementById('imagePreview');
+        imagePreview.src = e.target.result;
+        imagePreview.hidden = false;
+      }
+    }

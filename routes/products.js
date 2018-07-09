@@ -5,7 +5,7 @@ const TABLE = require('../common');
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads/');
+    cb(null, 'public/uploads/');
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname);
@@ -32,13 +32,23 @@ router.get('/add', function (req, res, next) {
   res.render('products/add');
 });
 
-router.post('/add', upload.single('productImage'), function (req, res, next) {
-  var name = req.body.txtName;
-  var price = req.body.txtPrice;
-  var description = req.body.txtDescription;
+router.post('/add', function (req, res, next) {
+  if (!req.files) {
+    return res.status(400).send('No files were uploaded.');
+  }
 
-  var query = "INSERT INTO " + TABLE.Product + "(name, price, description) VALUES('" + name + "'," + price + ",'" + description + "')";
-  console.log(query);
+  let name = req.body.txtName;
+  let price = req.body.txtPrice;
+  let description = req.body.txtDescription;
+  let imageName = Date.now().toString() + name;
+  let txtFile = req.files.txtFile;
+  txtFile.mv('public/uploads/' + imageName, function (err) {
+    if (err) {
+      return res.status(500).send(err);
+    }
+  });
+
+  let query = "INSERT INTO " + TABLE.Product + "(name, price, description, image) VALUES('" + name + "'," + price + ",'" + description + "','" + imageName + "')";
   db.query(query, (err, result) => {
     if (err) {
       return next(err);
