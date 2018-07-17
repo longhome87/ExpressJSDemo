@@ -2,18 +2,6 @@ var express = require('express');
 var router = express.Router();
 const db = require('../db');
 const TABLE = require('../common');
-const multer = require('multer');
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
-});
-const upload = multer({
-  storage: storage
-});
 
 router.get('/', function (req, res, next) {
   var query = "SELECT * FROM " + TABLE.Product + " ORDER BY Id";
@@ -38,17 +26,18 @@ router.post('/add', function (req, res, next) {
   }
 
   let name = req.body.txtName;
+  let cost = req.body.txtCost;
+  let qty = req.body.txtQty;
   let price = req.body.txtPrice;
-  let description = req.body.txtDescription;
-  let imageName = Date.now().toString() + name;
-  let txtFile = req.files.txtFile;
-  txtFile.mv('public/uploads/' + imageName, function (err) {
+  let imageName = Date.now().toString();
+  let txtImage = req.files.txtImage;
+  txtImage.mv('public/uploads/' + imageName, function (err) {
     if (err) {
       return res.status(500).send(err);
     }
   });
 
-  let query = "INSERT INTO " + TABLE.Product + "(name, price, description, image) VALUES('" + name + "'," + price + ",'" + description + "','" + imageName + "')";
+  let query = "INSERT INTO " + TABLE.Product + "(name, cost, quantity, price, image) VALUES('" + name + "'," + cost + "," + qty + "," + price + ",'" + imageName + "')";
   db.query(query, (err, result) => {
     if (err) {
       return next(err);
@@ -74,9 +63,10 @@ router.get('/edit/:id', function (req, res, next) {
 router.post('/edit/:id', function (req, res, next) {
   var id = req.body.txtId;
   var name = req.body.txtName;
+  var cost = req.body.txtCost;
+  var qty = req.body.txtQty;
   var price = req.body.txtPrice;
-  var description = req.body.txtDescription;
-  var query = "UPDATE " + TABLE.Product + " SET name = '" + name + "', price = " + price + ", description = '" + description + "' WHERE Id = " + id;
+  var query = "UPDATE " + TABLE.Product + " SET name = '" + name + "', cost = " + cost + ", quantity = " + qty + ", price = " + price + " WHERE Id = " + id;
   console.log(query);
   db.query(query, (err, result) => {
     if (err) {

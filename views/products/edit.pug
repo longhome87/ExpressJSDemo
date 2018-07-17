@@ -1,13 +1,43 @@
+//- extends ../layout
+
+//- block content
+//-   h3 Edit Product
+//-   form(class='form-group col-sm-10 col-md-8 col-lg-6 col-xl-6' method='POST' enctype='application/x-www-form-urlencoded')
+//-     input(type='hidden' name='txtId' value=product.id)
+//-     input(class='form-control' type='text' name='txtName' value=product.name)
+//-     br
+//-     input(class='form-control' type='number' name='txtPrice' value=product.price)
+//-     br
+//-     input(class='form-control' type='text' name='txtDescription' value=product.description)
+//-     br
+//-     input(class='btn btn-success' type='submit' name='btnSave' value='Save')
+
 extends ../layout
 
 block content
-  h3 Edit Product
-  form(class='form-group col-sm-10 col-md-8 col-lg-6 col-xl-6' method='POST' enctype='application/x-www-form-urlencoded')
-    input(type='hidden' name='txtId' value=product.id)
-    input(class='form-control' type='text' name='txtName' value=product.name)
-    br
-    input(class='form-control' type='number' name='txtPrice' value=product.price)
-    br
-    input(class='form-control' type='text' name='txtDescription' value=product.description)
-    br
-    input(class='btn btn-success' type='submit' name='btnSave' value='Save')
+  h2 Edit Product
+  form(method='POST' enctype='multipart/form-data')
+    .form-row
+      input(type='hidden' name='txtId' value=product.id)
+      .form-group.col-md-6
+        label(for='txtName') Name
+        input.form-control(name='txtName' type='text' value=product.name)
+      .form-group.col-md-6
+        label(for='txtCost') Cost
+        .input-group
+          .input-group-prepend
+            .input-group-text đ
+          input.form-control.text-right(name='txtCost' type='number' step=100 value=product.cost)
+      .form-group.col-md-6
+        label(for='txtQty') Quantity
+        input.form-control.text-right(name='txtQty' type='number' value=product.quantity)
+      .form-group.col-md-6
+        label(for='txtPrice') Price
+        .input-group
+          .input-group-prepend
+            .input-group-text đ
+          input.form-control.text-right(name='txtPrice' type='number' step=1000 value=product.price)
+    button.btn.btn-success(type='submit') Save
+    span  
+    a.btn.btn-secondary(href='/products') Back
+  
