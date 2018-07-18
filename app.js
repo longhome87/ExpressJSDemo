@@ -7,7 +7,6 @@ const fileUpload = require('express-fileupload');
 
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
-const flash = require('connect-flash');
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('./config')[env];
@@ -41,10 +40,8 @@ app.use(session({
   }),
   secret: 'minishop_secret_key',
   resave: false,
-  saveUninitialized: true,
   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
 }));
-app.use(flash());
 
 app.use(function (req, res, next) {
   res.locals.session = req.session;
@@ -58,11 +55,12 @@ app.use('/products', productsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+  next();
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (req, res, next) {
+  let err = createError(404);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

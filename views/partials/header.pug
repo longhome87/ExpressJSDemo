@@ -23,7 +23,7 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
         a.nav-link(href='#')
           i.fas.fa-shopping-cart
           |  Shopping Cart 
-          span.badge.badge-secondary #{session.cart.totalQty}
+          span.badge.badge-secondary #{session.cart ? session.cart.totalQty : 0}
       li.nav-item
         a.nav-link(href='#')
           i.fas.fa-user
