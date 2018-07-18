@@ -7,6 +7,7 @@ const fileUpload = require('express-fileupload');
 
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
+const flash = require('connect-flash');
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('./config')[env];
@@ -40,9 +41,10 @@ app.use(session({
   }),
   secret: 'minishop_secret_key',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
 }));
+app.use(flash());
 
 app.use(function (req, res, next) {
   res.locals.session = req.session;
