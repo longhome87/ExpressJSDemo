@@ -5,7 +5,9 @@ const db = require('../db');
 const TABLE = require('../common');
 
 router.get('/', function (req, res, next) {
-  var query = "SELECT * FROM " + TABLE.Product + " ORDER BY Id";
+  let sortField = req.query.sort || 'Id';
+  let direction = req.query.order || 'ASC';
+  var query = "SELECT * FROM " + TABLE.Product + " ORDER BY " + sortField + " " + direction;
   db.query(query, null, (err, result) => {
     if (err) {
       return next(err);

@@ -4,8 +4,9 @@
 
 .product-item {
   display: block;
-  margin: auto;
-  width: 50%;
+  margin: 20px auto;
+  width: 200px;
+  height: 200px;
 }
 
 .product-price {
