@@ -5,6 +5,16 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const fileUpload = require('express-fileupload');
 
+const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
+
+const env = process.env.NODE_ENV || 'development';
+const config = require('./config')[env];
+const pg = require('pg');
+const pgPool = new pg.Pool({
+  connectionString: config.connectionString
+});
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const customersRouter = require('./routes/customers');
@@ -24,6 +34,20 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload());
+app.use(session({
+  store: new pgSession({
+    pool: pgPool
+  }),
+  secret: 'minishop_secret_key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
+}));
+
+app.use(function (req, res, next) {
+  res.locals.session = req.session;
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
