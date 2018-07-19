@@ -40,7 +40,8 @@ app.use(session({
   }),
   secret: 'minishop_secret_key',
   resave: false,
-  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
+  saveUninitialized: false,
+  cookie: { maxAge: 180 * 60 * 1000 } // 30 days
 }));
 
 app.use(function (req, res, next) {
@@ -55,12 +56,11 @@ app.use('/products', productsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next();
+  next(createError(404));
 });
 
 // error handler
-app.use(function (req, res, next) {
-  let err = createError(404);
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

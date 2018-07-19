@@ -20,7 +20,6 @@ router.get('/', function (req, res, next) {
 
 router.get('/add-to-cart/:id', function (req, res, next) {
   let productId = req.params.id;
-  console.log(req.session.cart);
   let cart = new CartModel(req.session.cart ? req.session.cart : {});
 
   ProductService.findById(productId, (err, result) => {
@@ -31,6 +30,34 @@ router.get('/add-to-cart/:id', function (req, res, next) {
     cart.add(result.rows[0], productId);
     req.session.cart = cart;
     res.redirect('/');
+  });
+});
+
+router.get('/reduce/:id', function (req, res, next) {
+  let productId = req.params.id;
+  let cart = new CartModel(req.session.cart ? req.session.cart : {});
+  cart.reduceByOne(productId);
+  req.session.cart = cart;
+  res.redirect('/shopping-cart');
+});
+
+router.get('/remove/:id', function (req, res, next) {
+  let productId = req.params.id;
+  let cart = new CartModel(req.session.cart ? req.session.cart : {});
+  cart.removeItem(productId);
+  req.session.cart = cart;
+  res.redirect('/shopping-cart');
+});
+
+router.get('/shopping-cart', function (req, res, next) {
+  if (!req.session.cart) {
+    return res.render('shopping-cart', { products: null });
+  }
+
+  let cart = new CartModel(req.session.cart);
+  res.render('shopping-cart', {
+    products: cart.generateArray(),
+    totalPrice: cart.totalPrice
   });
 });
 

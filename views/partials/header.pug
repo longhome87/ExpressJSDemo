@@ -20,10 +20,10 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
           a.dropdown-item(href='?sort=price&order=desc') Price DESC
     ul.navbar-nav
       li.nav-item
-        a.nav-link(href='#')
+        a.nav-link(href='/shopping-cart')
           i.fas.fa-shopping-cart
           |  Shopping Cart 
-          span.badge.badge-secondary #{session.cart ? session.cart.totalQty : 0}
+          span.badge.badge-secondary #{session.cart ? session.cart.totalQty : ''}
       li.nav-item
         a.nav-link(href='#')
           i.fas.fa-user
