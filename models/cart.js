@@ -40,7 +40,6 @@ class Cart {
         for (let id in this.items) {
             arr.push(this.items[id]);
         }
-
         return arr;
     }
 }

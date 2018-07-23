@@ -13,21 +13,24 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
       li.nav-item
         a.nav-link(href='/products') Products
       li.nav-item.dropdown
-        a.nav-link.dropdown-toggle(data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
+        a.nav-link.dropdown-toggle(data-toggle='dropdown')
           | Sort
         .dropdown-menu
           a.dropdown-item(href='?sort=price&order=asc') Price ASC
           a.dropdown-item(href='?sort=price&order=desc') Price DESC
     ul.navbar-nav
       li.nav-item
-        a.nav-link(href='/shopping-cart')
+        a.nav-link(href='/shopping-carts')
           i.fas.fa-shopping-cart
           |  Shopping Cart 
           span.badge.badge-secondary #{session.cart ? session.cart.totalQty : ''}
-      li.nav-item
-        a.nav-link(href='#')
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle(data-toggle='dropdown')
           i.fas.fa-user
           |  User Management
+        .dropdown-menu
+          a.dropdown-item(href='?sort=price&order=asc') Sign In
+          a.dropdown-item(href='?sort=price&order=desc') Sign Up
 
     //- form.form-inline.my-2.my-lg-0
     //-   input.form-control.mr-sm-2(type='search' placeholder='Search' aria-label='Search')

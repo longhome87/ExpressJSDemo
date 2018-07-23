@@ -22,4 +22,4 @@ block content
           td
             a(href='/products/edit/' + row.id) Edit
             span  | 
-            a(onclick='return confirm("Are you sure?")' href='/products/delete/' + row.id) Delete
+            a(onclick='return confirm("Are you sure?")' href='/products/delete/' + row.id + '?image=' + row.image) Delete
