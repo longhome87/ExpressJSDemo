@@ -3,6 +3,7 @@ const router = express.Router();
 const csrf = require('csurf');
 const csrfProtection = csrf();
 const passport = require('passport');
+const UserService = require('../services/user');
 
 router.use(csrfProtection);
 
@@ -26,16 +27,39 @@ router.get('/signup', function (req, res, next) {
     res.render('users/signup', { csrfToken: req.csrfToken() });
 });
 
-// router.post('/signup', function (req, res, next) {
-//     console.log('##########');
-//     res.render('users/profile');
-// });
+router.post('/signup', function (req, res, next) {
+    let email = req.body.txtEmail;
+    let password = req.body.txtPassword;
 
-router.post('/signup', passport.authenticate('local.signup', {
-    successRedirect: '/users/profile',
-    failureRedirect: '/users/signup',
-    failureFlash: true
-}));
+    UserService
+        .findByEmail(email)
+        .then(result => {
+            if (result.rowCount > 0) {
+                res.render('users/signup', {
+                    hasErrors: true, messages: 'Email is already in use.'
+                });
+            } else {
+                UserService
+                    .create(email, password)
+                    .then(result => {
+                        console.log(result);
+                        res.render('users/profile');
+                    })
+                    .catch(err => {
+                        next(err);
+                    });
+            }
+        })
+        .catch(err => {
+            next(err);
+        });
+});
+
+// router.post('/signup', passport.authenticate('local.signup', {
+//     successRedirect: '/users/profile',
+//     failureRedirect: '/users/signup',
+//     failureFlash: true
+// }));
 
 router.get('/signin', function (req, res, next) {
     res.render('users/signin');

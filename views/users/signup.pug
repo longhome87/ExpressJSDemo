@@ -4,7 +4,8 @@ block content
   .row
     .col-md-4.offset-md-4
       h1 Sign Up
-        | Validation Errors
+      - if(hasErrors)
+        .alert.alert-danger #{messages}
       form(method='post')
         .form-group
           label(for='txtEmail') Email
@@ -14,4 +15,4 @@ block content
           input.form-control(name='txtPassword' type='password' placeholder='Password')
         input(type='hidden' name='_csrf' value=csrfToken)
         button.btn.btn-success(type='submit') Sign Up
-      
+
