@@ -13,7 +13,7 @@ const env = process.env.NODE_ENV || 'development';
 const config = require('./config')[env];
 const pg = require('pg');
 const pgPool = new pg.Pool({
-  connectionString: config.connectionString
+    connectionString: config.connectionString
 });
 
 const indexRouter = require('./routes/index');
@@ -32,25 +32,25 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
-  extended: false
+    extended: false
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload());
 app.use(session({
-  store: new pgSession({
-    pool: pgPool
-  }),
-  secret: 'minishop_secret_key',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 3 * 60 * 60 * 1000 } // 3 hours
+    store: new pgSession({
+        pool: pgPool
+    }),
+    secret: 'minishop_secret_key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 3 * 60 * 60 * 1000 } // 3 hours
 }));
 app.use(validator());
 
 app.use(function (req, res, next) {
-  res.locals.session = req.session;
-  next();
+    res.locals.session = req.session;
+    next();
 });
 
 app.use('/', indexRouter);
@@ -62,18 +62,18 @@ app.use('/api/products', productAPI);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+    next(createError(404));
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;

@@ -1,4 +1,4 @@
-const DB = require('../DB');
+const DB = require('../db');
 const COMMON = require('../COMMON');
 const USER_TABLE_NAME = COMMON.TABLE.User;
 const UTIL = require('util');
