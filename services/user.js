@@ -1,5 +1,5 @@
 const DB = require('../db');
-const COMMON = require('../COMMON');
+const COMMON = require('../common');
 const USER_TABLE_NAME = COMMON.TABLE.User;
 const UTIL = require('util');
 const BCRYPT = require('bcrypt-nodejs');
