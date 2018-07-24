@@ -1,6 +1,6 @@
 nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
   a.navbar-brand(href='/')
-    img.d-inline-block.align-top(src='images/photo64.png' width='30' height='30' alt='')
+    img.d-inline-block.align-top(src='/images/photo64.png' width='30' height='30' alt='')
     |     MiniShop
   button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
     span.navbar-toggler-icon
@@ -16,8 +16,8 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
         a.nav-link.dropdown-toggle(data-toggle='dropdown')
           | Sort
         .dropdown-menu
-          a.dropdown-item(href='?sort=price&order=asc') Price ASC
-          a.dropdown-item(href='?sort=price&order=desc') Price DESC
+          a.dropdown-item(href='/?sort=price&order=asc') Price ASC
+          a.dropdown-item(href='/?sort=price&order=desc') Price DESC
     ul.navbar-nav
       li.nav-item
         a.nav-link(href='/shopping-carts')
@@ -29,8 +29,8 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
           i.fas.fa-user
           |  User Management
         .dropdown-menu
-          a.dropdown-item(href='?sort=price&order=asc') Sign In
-          a.dropdown-item(href='?sort=price&order=desc') Sign Up
+          a.dropdown-item(href='/users/signin') Sign In
+          a.dropdown-item(href='/users/signup') Sign Up
 
     //- form.form-inline.my-2.my-lg-0
     //-   input.form-control.mr-sm-2(type='search' placeholder='Search' aria-label='Search')

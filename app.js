@@ -16,6 +16,7 @@ const pg = require('pg');
 const pgPool = new pg.Pool({
   connectionString: config.connectionString
 });
+require('./config/passport');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');

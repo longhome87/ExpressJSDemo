@@ -1,11 +1,29 @@
-const db = require('../db');
-const Common = require('../common');
+const DB = require('../DB');
+const COMMON = require('../COMMON');
+const USER_TABLE_NAME = COMMON.TABLE.Product;
+const UTIL = require('util');
+const BCRYPT = require('bcrypt-nodejs');
 
-class ProductService {
-    findById(id, callback) {
-        var query = "SELECT * FROM " + Common.TABLE.Product + " WHERE Id = " + id;
-        db.query(query, callback);
+class UserService {
+    findById(id) {
+        let command = UTIL.format("SELECT * FROM %s WHERE Id = %s", USER_TABLE_NAME, id);
+        return DB.execute(command);
+    }
+
+    findByEmail(email) {
+        let command = UTIL.format("SELECT * FROM %s WHERE Email = %s", USER_TABLE_NAME, email);
+        return DB.execute(command);
+    }
+
+    create(email, password) {
+        let encryptedPassword = this.encryptPassword(password);
+        let command = UTIL.format("INSERT INTO %s(email, password) VALUES('%s', '%s')", email, encryptedPassword);
+        return DB.execute(command);
+    }
+
+    encryptPassword(password) {
+        return BCRYPT.hashSync(password, BCRYPT.genSaltSync(5));
     }
 }
 
-module.exports = new ProductService();
+module.exports = new UserService();
