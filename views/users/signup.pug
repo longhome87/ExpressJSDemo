@@ -5,7 +5,9 @@ block content
     .col-md-4.offset-md-4
       h1 Sign Up
       - if(hasErrors)
-        .alert.alert-danger #{messages}
+        .alert.alert-danger
+          each message in messages
+            div #{message}
       form(method='post')
         .form-group
           label(for='txtEmail') Email

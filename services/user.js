@@ -25,6 +25,10 @@ class UserService {
     encryptPassword(password) {
         return BCRYPT.hashSync(password, BCRYPT.genSaltSync(5));
     }
+
+    validPassword(password, encryptedPassword) {
+        return BCRYPT.compareSync(password, encryptedPassword);
+    }
 }
 
 module.exports = new UserService();
