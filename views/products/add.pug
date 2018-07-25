@@ -1,12 +1,42 @@
 extends ../layout
 
 block content
-  h3 Add Product
-  form(class='form-group col-sm-10 col-md-8 col-lg-6 col-xl-6' method='POST' enctype='application/x-www-form-urlencoded')
-    input(class='form-control' type='text' name='txtName' placeholder='Name')
-    br
-    input(class='form-control' type='number' name='txtPrice' placeholder='Price')
-    br
-    input(class='form-control' type='text' name='txtDescription' placeholder='Description')
-    br
-    input(class='btn btn-success' type='submit' name='btnAdd' value='Add')
+  h2 Add Product
+  form(method='POST' enctype='multipart/form-data')
+    .form-row
+      .form-group.col-md-6
+        label(for='txtName') Name
+        input.form-control(name='txtName' type='text' placeholder='Name')
+      .form-group.col-md-6
+        label(for='txtCost') Cost
+        .input-group
+          .input-group-prepend
+            .input-group-text đ
+          input.form-control.text-right(name='txtCost' type='number' placeholder='Cost' value=1000 step=100)
+      .form-group.col-md-6
+        label(for='txtQty') Quantity
+        input.form-control.text-right(name='txtQty' type='number' placeholder='Quantity' value=1)
+      .form-group.col-md-6
+        label(for='txtPrice') Price
+        .input-group
+          .input-group-prepend
+            .input-group-text đ
+          input.form-control.text-right(name='txtPrice' type='number' placeholder='Price' value=1000 step=1000)
+      .form-group.col-md-6
+        label(for='txtImage') Image
+        input#txtImage.form-control(name='txtImage' type='file')
+      .form-group.col-md-6
+        img#imagePreview.form-control(hidden='')
+    button.btn.btn-success(type='submit') Save
+    span  
+    a.btn.btn-secondary(href='/products') Back
+  script.
+    document.getElementById('txtImage').onchange = function() {
+      var reader = new FileReader();
+      reader.readAsDataURL(this.files[0]);
+      reader.onload = function(e) {
+        var imagePreview = document.getElementById('imagePreview');
+        imagePreview.src = e.target.result;
+        imagePreview.hidden = false;
+      }
+    }

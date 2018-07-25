@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  .container
+    - if(!products || products.length == 0)
+      .row
+        .col-sm-8.col-md-8.offset-sm-2.offset-md-2
+          h2 No Items in Cart
+    - else
+      .row
+        .col-sm-8.col-md-8.offset-sm-2.offset-md-2
+          ul.list-group
+            each row in products
+              li.list-group-item.d-flex.justify-content-between.align-items-center
+                div
+                  span.badge.badge-pill.badge-secondary.mr-2 #{row.qty}
+                  strong #{row.item.name}
+                .btn-toolbar
+                  button.btn.btn-success.mr-2 #{row.price}
+                  .dropdown
+                    button.btn.btn-primary.dropdown-toggle(data-toggle='dropdown')
+                      | Action
+                    .dropdown-menu
+                      a.dropdown-item(href='shopping-carts/reduce/' + row.item.id) Reduce by 1
+                      a.dropdown-item(href='shopping-carts/remove/' + row.item.id) Remove All
+      .row
+        .col-sm-8.col-md-8.offset-sm-2.offset-md-2
+          strong Total: #{totalPrice}
+      hr
+      .row
+        .col-sm-8.col-md-8.offset-sm-2.offset-md-2
+          button.btn.btn-success Checkout

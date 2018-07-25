@@ -1,28 +1,25 @@
 extends ../layout
 
 block content
-  div(class='menu-bar')
-    h3 Product Page
-  br
-  div
-    table
+  h2 Product Page
+  div.table-responsive
+    table.table.table-bordered.table-striped
       thead
         tr
-          th(style='width: 10%') No.
-          th(style='width: 20%') Name
+          th(style='width: 5%') No.
+          th(style='width: 40%') Name
           th(style='width: 10%') Price
-          th(style='width: 50%') Description
+          th(style='width: 35%') Image
           th(style='width: 10%')
-            a(href='../products/add')
-              button(class='btn btn-success') Add New
+            a.btn.btn-success(href='../products/add') Add New
       tbody
       each row, index in result.rows
         tr
           td #{index + 1}
           td #{row.name}
           td #{row.price}
-          td #{row.description}
+          td #{row.image}
           td
-            a(href='/products/edit/' + row.id) Edit | 
-            a(onclick='return confirm("Are you sure?")' href='/products/delete/' + row.id) Delete
-    
+            a(href='/products/edit/' + row.id) Edit
+            span  | 
+            a(onclick='return confirm("Are you sure?")' href='/products/delete/' + row.id + '?image=' + row.image) Delete

@@ -1,22 +1,18 @@
 extends layout
 
 block content
-  div(class='menu-bar')
-    h3 Home Page
-  div
-    each row in result.rows
-      div(class='product-item-container col-sm-6 col-md-4 col-lg-4 col-xl-3')
-        div(class='thumbnail')
-          //- img(src='images/example-product.png')
-          img(class='img-thumbnail' src='images/product-icon.png')
-          div(class='caption')
-            h3 #{row.name}
-            p(class='description') #{row.description}
-          div(class='clearfix')
-            script.
-              var handleClick=function(){
-                console.log('productId');
-              }
-            div(class='price float-left') #{row.price} VNĐ
-            a(href='#' class='btn btn-success float-right' role='button' onclick='handleClick()') Add To Cart
-
+  .container-fluid
+      .row
+        each row in result.rows
+          .product-item-container.col-xl-3.col-lg-4.col-md-6
+            .card
+              .product-item
+                img.card-img-top(src='uploads/' + row.image)
+              .card-body
+                h5.card-title #{row.name}
+                p.card-text
+                  | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
+                h4.product-price.float-left #{row.price}
+                  span 
+                    u đ
+                a.btn.btn-success.float-right(href='shopping-carts/add-to-cart/' + row.id) Add To Cart

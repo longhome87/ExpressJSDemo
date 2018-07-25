@@ -1,24 +1,14 @@
-var config = require('config');
-var connectionString = function () {
-    switch (process.env.NODE_ENV) {
-        case 'development':
-            var development = config.get('dbConfig.connection-string');
-            return development;
-        case 'production':
-            var production = config.get('dbConfig.connection-string');
-            return production;
-        default:
-            return null;
-    }
-}
+const env = process.env.NODE_ENV || 'development';
+const config = require('../config')[env];
 
 const { Pool } = require('pg');
 const pool = new Pool({
-    connectionString: connectionString()
+    connectionString: config.connectionString
 });
 
 module.exports = {
-    query: (text, params, callback) => {
-        return pool.query(text, params, callback);
+    execute: (command) => {
+        console.log('QUERY: ', command);
+        return pool.query(command);
     }
 }

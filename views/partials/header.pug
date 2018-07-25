@@ -1,16 +1,45 @@
-nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  a.navbar-brand(href='/') MiniShop
-  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
+  a.navbar-brand(href='/')
+    img.d-inline-block.align-top(src='/images/photo64.png' width='30' height='30' alt='')
+    |     MiniShop
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
     span.navbar-toggler-icon
-  #navbarNav.collapse.navbar-collapse
-    ul.navbar-nav
+  #navbarSupportedContent.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
       li.nav-item.active
         a.nav-link(href='/')
           | Home 
           span.sr-only (current)
       li.nav-item
         a.nav-link(href='/products') Products
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle(data-toggle='dropdown')
+          | Sort
+        .dropdown-menu
+          a.dropdown-item(href='/?sort=price&order=asc') Price ASC
+          a.dropdown-item(href='/?sort=price&order=desc') Price DESC
+    ul.navbar-nav
       li.nav-item
-        a.nav-link(href='#') About
-      li.nav-item
-        a.nav-link.disabled(href='#') Disabled
+        a.nav-link(href='/shopping-carts')
+          i.fas.fa-shopping-cart
+          |  Shopping Cart 
+          span.badge.badge-secondary #{session.cart ? session.cart.totalQty : ''}
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle(data-toggle='dropdown')
+          i.fas.fa-user
+          |  User Management
+        .dropdown-menu
+          - if(login) {
+            a.dropdown-item(href='/users/profile') User Account
+            .dropdown-divider
+            a.dropdown-item(href='/users/logout') Logout
+          - }
+          - else {
+            a.dropdown-item(href='/users/signup') Sign Up
+            a.dropdown-item(href='/users/signin') Sign In
+          - }
+
+    //- form.form-inline.my-2.my-lg-0
+    //-   input.form-control.mr-sm-2(type='search' placeholder='Search' aria-label='Search')
+    //-   button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+
