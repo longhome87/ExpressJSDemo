@@ -2,17 +2,19 @@ extends layout
 
 block content
   .container-fluid
-      .row
-        each row in result.rows
-          .product-item-container.col-xl-3.col-lg-4.col-md-6
-            .card
-              .product-item
-                img.card-img-top(src='uploads/' + row.image)
-              .card-body
-                h5.card-title #{row.name}
-                p.card-text
-                  | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
-                h4.product-price.float-left #{row.price}
-                  span 
-                    u đ
-                a.btn.btn-success.float-right(href='shopping-carts/add-to-cart/' + row.id) Add To Cart
+    .row
+      each row in result.rows
+        .product-item-container.col-xl-3.col-lg-4.col-md-6
+          .card
+            .product-item
+              img.card-img-top(src='uploads/' + row.image)
+            .card-body
+              h5.card-title #{row.name}
+              p.card-text
+                | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
+              h4.product-price.float-left #{row.price}
+                span 
+                  u đ
+              //- a.btn.btn-success.float-right(href='/shopping-carts/add-to-cart/' + row.id) Add To Cart
+              a#btnAddToCart(onclick='addToCart(' + row.id + ')').btn.btn-success.float-right Add To Cart
+

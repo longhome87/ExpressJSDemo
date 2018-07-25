@@ -13,7 +13,7 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
       li.nav-item
         a.nav-link(href='/products') Products
       li.nav-item.dropdown
-        a.nav-link.dropdown-toggle(data-toggle='dropdown')
+        a.nav-link.dropdown-toggle(data-toggle='dropdown' role='button')
           | Sort
         .dropdown-menu
           a.dropdown-item(href='/?sort=price&order=asc') Price ASC
@@ -23,9 +23,9 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
         a.nav-link(href='/shopping-carts')
           i.fas.fa-shopping-cart
           |  Shopping Cart 
-          span.badge.badge-secondary #{session.cart ? session.cart.totalQty : ''}
+          span#shoppingCartBadge.badge.badge-secondary #{session.cart ? session.cart.totalQty : ''}
       li.nav-item.dropdown
-        a.nav-link.dropdown-toggle(data-toggle='dropdown')
+        a.nav-link.dropdown-toggle(data-toggle='dropdown' role='button')
           i.fas.fa-user
           |  User Management
         .dropdown-menu

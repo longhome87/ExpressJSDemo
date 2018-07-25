@@ -24,7 +24,8 @@ router.get('/add-to-cart/:id', function (req, res, next) {
         .then((result) => {
             cart.add(result.rows[0], productId);
             req.session.cart = cart;
-            res.redirect('/');
+            res.send({ totalQty: cart.totalQty });
+            // res.redirect('/');
         })
         .catch((err) => {
             return next(err);
