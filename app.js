@@ -4,6 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const fileUpload = require('express-fileupload');
+const passport = require('passport');
+const flash = require('connect-flash');
 const validator = require('express-validator');
 
 const session = require('express-session');
@@ -15,6 +17,7 @@ const pg = require('pg');
 const pgPool = new pg.Pool({
     connectionString: config.connectionString
 });
+require('./config/passport');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -46,9 +49,13 @@ app.use(session({
     saveUninitialized: false,
     cookie: { maxAge: 3 * 60 * 60 * 1000 } // 3 hours
 }));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(validator());
 
 app.use(function (req, res, next) {
+    res.locals.login = req.isAuthenticated();
     res.locals.session = req.session;
     next();
 });

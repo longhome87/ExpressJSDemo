@@ -29,8 +29,15 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
           i.fas.fa-user
           |  User Management
         .dropdown-menu
-          a.dropdown-item(href='/users/signin') Sign In
-          a.dropdown-item(href='/users/signup') Sign Up
+          - if(login) {
+            a.dropdown-item(href='/users/profile') User Account
+            .dropdown-divider
+            a.dropdown-item(href='/users/logout') Logout
+          - }
+          - else {
+            a.dropdown-item(href='/users/signup') Sign Up
+            a.dropdown-item(href='/users/signin') Sign In
+          - }
 
     //- form.form-inline.my-2.my-lg-0
     //-   input.form-control.mr-sm-2(type='search' placeholder='Search' aria-label='Search')

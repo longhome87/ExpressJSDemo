@@ -17,7 +17,7 @@ class UserService {
 
     create(email, password) {
         let encryptedPassword = this.encryptPassword(password);
-        let command = UTIL.format("INSERT INTO %s(email, password) VALUES('%s', '%s')",
+        let command = UTIL.format("INSERT INTO %s(email, password) VALUES('%s', '%s') RETURNING id",
             USER_TABLE_NAME, email, encryptedPassword);
         return DB.execute(command);
     }
