@@ -6,18 +6,25 @@ class Socket {
         io.on(SOCKET.CONNECTION, function (socket) {
             console.log('A user connected');
             var defaultRoom = 'adminRoom';
-            socket.on(SOCKET.CREATE, function (user) {
+            var admin = 'nhlong2@tma.com.vn';
+            socket.on(SOCKET.CREATE, function (username) {
                 socket.join(defaultRoom);
 
-                let cmd = user == 'admin' ? SOCKET.IN_CHAT : SOCKET.CHAT;
-                let text = user + ' joined room!';
-                console.log(text);
-                io.sockets.in(defaultRoom).emit(cmd, text);
+                let cmd = username == admin ? SOCKET.IN_CHAT : SOCKET.CHAT;
+                let data = {
+                    username: username,
+                    message: 'Joined room!'
+                };
+
+                io.sockets.in(defaultRoom).emit(cmd, data);
             });
 
-            socket.on(SOCKET.CHAT, function (msg) {
-                console.log(msg);
-                io.sockets.in(defaultRoom).emit(SOCKET.CHAT, msg);
+            socket.on(SOCKET.CHAT, function (data) {
+                if (data.username == admin) {
+                    data.username = 'admin';
+                }
+
+                io.sockets.in(defaultRoom).emit(SOCKET.CHAT, data);
             });
 
             socket.on(SOCKET.IN_CHAT, function (msg) {

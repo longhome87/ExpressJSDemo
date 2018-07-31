@@ -31,8 +31,8 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
           |  Shopping Cart 
           span#shoppingCartBadge.badge.badge-secondary #{session.cart ? session.cart.totalQty : ''}
       li.nav-item.dropdown
-        a.nav-link.dropdown-toggle(href='' data-toggle='dropdown' role='button')
-          |  User Management
+        a#userManagement.nav-link.dropdown-toggle(href='' data-toggle='dropdown' role='button')
+          | #{session.currentUser ? session.currentUser : ' User Management'}
         .dropdown-menu
           - if(login) {
             a.dropdown-item(href='/users/profile') User Account

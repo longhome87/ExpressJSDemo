@@ -14,17 +14,24 @@ block content
   script.
     $(function () {
       var socket = io();
-      var defaultUser = 'longhome87';
-      socket.emit(SOCKET.CREATE, defaultUser);
 
-      $('form').submit(function(){
-        socket.emit(SOCKET.CHAT, $('#m').val());
+      var userManagement = document.getElementById('userManagement');
+      var username = userManagement.innerHTML;
+      socket.emit(SOCKET.CREATE, username);
+
+      $('form').submit(function() {
+        var data = { 
+          username: username,
+          message: $('#m').val()
+        }
+
+        socket.emit(SOCKET.CHAT, data);
         $('#m').val('');
         return false;
       });
 
-      socket.on(SOCKET.CHAT, function(msg){
-        $('#messages').append($('<li>').text(msg));
+      socket.on(SOCKET.CHAT, function(data) {
+        $('#messages').append($('<li>').text(data.username + ': ' + data.message));
         window.scrollTo(0, document.body.scrollHeight);
       });
     });

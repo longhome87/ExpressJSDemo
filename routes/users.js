@@ -12,6 +12,7 @@ router.get('/profile', authenticate.isLoggedIn, function (req, res, next) {
 });
 
 router.get('/logout', authenticate.isLoggedIn, function (req, res, next) {
+    req.session.currentUser = null;
     req.logout();
     res.redirect('/');
 });
@@ -55,6 +56,7 @@ router.post('/signin', passport.authenticate('local.signin', {
     failureRedirect: '/users/signin',
     failureFlash: true
 }), function (req, res, next) {
+    req.session.currentUser = req.body.txtEmail;
     if (req.session.oldUrl) {
         let oldUrl = req.session.oldUrl;
         req.session.oldUrl = null;
