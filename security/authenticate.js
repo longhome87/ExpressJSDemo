@@ -4,6 +4,7 @@ class Authenticate {
             return next();
         }
 
+        req.session.oldUrl = req.url;
         res.redirect('/');
     };
 
@@ -13,6 +14,15 @@ class Authenticate {
         }
 
         res.redirect('/');
+    };
+
+    static hasLoggedIn(routeName, req, res, next) {
+        if (req.isAuthenticated()) {
+            return next();
+        }
+
+        req.session.oldUrl = routeName;
+        res.redirect('/users/signin');
     };
 }
 

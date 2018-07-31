@@ -2,6 +2,12 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
   a.navbar-brand(href='/')
     img.d-inline-block.align-top(src='/images/photo64.png' width='30' height='30' alt='')
     |     MiniShop
+  ul#navbarMini.navbar-nav
+    li.nav-item
+      a.nav-link(href='/shopping-carts')
+        i.fas.fa-shopping-cart
+        |  
+        span#shoppingCartBadgeMini.badge.badge-secondary #{session.cart ? session.cart.totalQty : ''}
   button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent')
     span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
@@ -41,4 +47,3 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
     //- form.form-inline.my-2.my-lg-0
     //-   input.form-control.mr-sm-2(type='search' placeholder='Search' aria-label='Search')
     //-   button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
-

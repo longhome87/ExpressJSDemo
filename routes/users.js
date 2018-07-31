@@ -30,11 +30,16 @@ router.get('/signup', function (req, res, next) {
 });
 
 router.post('/signup', passport.authenticate('local.signup', {
-    successRedirect: '/users/profile',
     failureRedirect: '/users/signup',
     failureFlash: true
-}), function (req, res) {
-
+}), function (req, res, next) {
+    if (req.session.oldUrl) {
+        let oldUrl = req.session.oldUrl;
+        req.session.oldUrl = null;
+        res.redirect(oldUrl);
+    } else {
+        res.redirect('/users/profile');
+    }
 });
 
 router.get('/signin', function (req, res, next) {
@@ -47,11 +52,16 @@ router.get('/signin', function (req, res, next) {
 });
 
 router.post('/signin', passport.authenticate('local.signin', {
-    successRedirect: '/users/profile',
     failureRedirect: '/users/signin',
     failureFlash: true
-}), function (req, res) {
-
+}), function (req, res, next) {
+    if (req.session.oldUrl) {
+        let oldUrl = req.session.oldUrl;
+        req.session.oldUrl = null;
+        res.redirect(oldUrl);
+    } else {
+        res.redirect('/users/profile');
+    }
 });
 
 module.exports = router;

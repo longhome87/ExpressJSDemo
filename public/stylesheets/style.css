@@ -16,3 +16,9 @@
 #imagePreview {
   max-width: 300px;
 }
+
+@media (min-width: 992px) {
+  #navbarMini {
+    display: none;
+  }
+}

@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const CartModel = require('../models/cart');
 const ProductService = require('../services/product');
+const authenticate = require('../security/authenticate');
+
+router.get('/checkout', authenticate.hasLoggedIn.bind(this, '/shopping-carts'), function (req, res, next) {
+    req.session.cart = {};
+    res.render('shopping-carts/checkout');
+});
 
 router.get('/', function (req, res, next) {
     if (!req.session.cart) {
@@ -45,11 +51,6 @@ router.get('/remove/:id', function (req, res, next) {
     cart.removeItem(productId);
     req.session.cart = cart;
     res.redirect('/shopping-carts');
-});
-
-router.get('/checkout', function (req, res, next) {
-    req.session.cart = {};
-    res.render('shopping-carts/checkout');
 });
 
 module.exports = router;

@@ -10,8 +10,10 @@ function addToCart(id) {
         method: 'GET',
         url: '/shopping-carts/add-to-cart/' + id,
     }).done(function (result) {
-        var span = document.getElementById('shoppingCartBadge');
-        span.innerHTML = result.totalQty;
+        var shoppingCartBadge = document.getElementById('shoppingCartBadge');
+        var shoppingCartBadgeMini = document.getElementById('shoppingCartBadgeMini');
+        shoppingCartBadge.innerHTML = result.totalQty;
+        shoppingCartBadgeMini.innerHTML = result.totalQty;
     })
     return false;
 };
