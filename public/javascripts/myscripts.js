@@ -13,4 +13,5 @@ function addToCart(id) {
         var span = document.getElementById('shoppingCartBadge');
         span.innerHTML = result.totalQty;
     })
+    return false;
 };

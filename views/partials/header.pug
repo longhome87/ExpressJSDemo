@@ -2,7 +2,7 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
   a.navbar-brand(href='/')
     img.d-inline-block.align-top(src='/images/photo64.png' width='30' height='30' alt='')
     |     MiniShop
-  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent')
     span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     ul.navbar-nav.mr-auto
@@ -13,7 +13,7 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
       li.nav-item
         a.nav-link(href='/products') Products
       li.nav-item.dropdown
-        a.nav-link.dropdown-toggle(data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
+        a.nav-link.dropdown-toggle(href='' data-toggle='dropdown' role='button')
           | Sort
         .dropdown-menu
           a.dropdown-item(href='/?sort=price&order=asc') Price ASC
@@ -25,7 +25,7 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
           |  Shopping Cart 
           span#shoppingCartBadge.badge.badge-secondary #{session.cart ? session.cart.totalQty : ''}
       li.nav-item.dropdown
-        a.nav-link.dropdown-toggle(data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
+        a.nav-link.dropdown-toggle(href='' data-toggle='dropdown' role='button')
           |  User Management
         .dropdown-menu
           - if(login) {
