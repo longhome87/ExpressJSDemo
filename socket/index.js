@@ -12,6 +12,7 @@ class Socket {
 
                 let cmd = username == admin ? SOCKET.IN_CHAT : SOCKET.CHAT;
                 let data = {
+                    'display-name': username,
                     username: username,
                     message: 'Joined room!'
                 };
@@ -21,15 +22,10 @@ class Socket {
 
             socket.on(SOCKET.CHAT, function (data) {
                 if (data.username == admin) {
-                    data.username = 'admin';
+                    data['display-name'] = 'Admin';
                 }
 
                 io.sockets.in(defaultRoom).emit(SOCKET.CHAT, data);
-            });
-
-            socket.on(SOCKET.IN_CHAT, function (msg) {
-                console.log(msg);
-                socket.emit(SOCKET.IN_CHAT, msg);
             });
         });
     }

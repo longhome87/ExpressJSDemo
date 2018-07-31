@@ -30,12 +30,13 @@ block content
       });
 
       socket.on(SOCKET.CHAT, function(data) {
-        $('#messages').append($('<li>').text(data.username + ': ' + data.message));
+        var name = data.username == username ? 'Me' : data.username;
+        $('#messages').append($('<li>').text(name + ': ' + data.message));
         window.scrollTo(0, document.body.scrollHeight);
       });
       
-      socket.on(SOCKET.IN_CHAT, function(msg) {
-        $('#messages').append($('<li>').text(msg));
+      socket.on(SOCKET.IN_CHAT, function(data) {
+        $('#messages').append($('<li>').text('Me: ' + data.message));
         window.scrollTo(0, document.body.scrollHeight);
       });
     });

@@ -31,7 +31,8 @@ block content
       });
 
       socket.on(SOCKET.CHAT, function(data) {
-        $('#messages').append($('<li>').text(data.username + ': ' + data.message));
+        var name = data.username == username ? 'Me' : data['display-name'];
+        $('#messages').append($('<li>').text(name + ': ' + data.message));
         window.scrollTo(0, document.body.scrollHeight);
       });
     });
