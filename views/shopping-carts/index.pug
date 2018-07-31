@@ -21,12 +21,12 @@ block content
                     button.btn.btn-primary.dropdown-toggle(data-toggle='dropdown')
                       | Action
                     .dropdown-menu
-                      a.dropdown-item(href='shopping-carts/reduce/' + row.item.id) Reduce by 1
-                      a.dropdown-item(href='shopping-carts/remove/' + row.item.id) Remove All
+                      a.dropdown-item(href='/shopping-carts/reduce/' + row.item.id) Reduce by 1
+                      a.dropdown-item(href='/shopping-carts/remove/' + row.item.id) Remove All
       .row
         .col-sm-8.col-md-8.offset-sm-2.offset-md-2
           strong Total: #{totalPrice}
       hr
       .row
         .col-sm-8.col-md-8.offset-sm-2.offset-md-2
-          button.btn.btn-success Checkout
+          a(href='/shopping-carts/checkout/').btn.btn-success Checkout

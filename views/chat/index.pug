@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+  style.
+    #messages { list-style-type: none; margin: 0; padding: 0; }
+    #messages li { padding: 5px 10px; }
+    #messages li:nth-child(odd) { background: #eee; }
+  ul#messages
+  form(action='')
+    input#m(autocomplete='off')
+    button Send
+  script(src='https://code.jquery.com/jquery-3.3.1.min.js')
+  script.
+    $(function () {
+      var socket = io();
+      var defaultUser = 'admin';
+      socket.emit(SOCKET.CREATE, defaultUser);
+
+      $('form').submit(function(){
+        socket.emit(SOCKET.CHAT, $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+
+      socket.on(SOCKET.CHAT, function(msg){
+        $('#messages').append($('<li>').text(msg));
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      
+      socket.on(SOCKET.IN_CHAT, function(msg){
+        $('#messages').append($('<li>').text(msg));
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+    });

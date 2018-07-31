@@ -25,7 +25,6 @@ router.get('/add-to-cart/:id', function (req, res, next) {
             cart.add(result.rows[0], productId);
             req.session.cart = cart;
             res.send({ totalQty: cart.totalQty });
-            // res.redirect('/');
         })
         .catch((err) => {
             return next(err);
@@ -46,6 +45,11 @@ router.get('/remove/:id', function (req, res, next) {
     cart.removeItem(productId);
     req.session.cart = cart;
     res.redirect('/shopping-carts');
+});
+
+router.get('/checkout', function (req, res, next) {
+    req.session.cart = {};
+    res.render('shopping-carts/checkout');
 });
 
 module.exports = router;

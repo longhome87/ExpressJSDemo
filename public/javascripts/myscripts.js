@@ -1,8 +1,9 @@
-// $(document).ready(function () {
-//     $("#btnAddToCart").click(function () {
-//         alert('this.value');
-//     });
-// });
+const SOCKET = {
+    CONNECTION: 'connection',
+    CREATE: 'create',
+    CHAT: 'chat',
+    IN_CHAT: 'in_chat'
+};
 
 function addToCart(id) {
     $.ajax({
@@ -12,4 +13,4 @@ function addToCart(id) {
         var span = document.getElementById('shoppingCartBadge');
         span.innerHTML = result.totalQty;
     })
-}
+};

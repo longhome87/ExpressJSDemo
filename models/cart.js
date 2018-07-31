@@ -13,8 +13,10 @@ class Cart {
         }
 
         storedItem.qty++;
-        storedItem.price = storedItem.item.price * storedItem.qty;
         this.totalQty++;
+
+        this.totalPrice -= storedItem.price;
+        storedItem.price = storedItem.item.price * storedItem.qty;
         this.totalPrice += storedItem.price;
     }
 
