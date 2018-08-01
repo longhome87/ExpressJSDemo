@@ -1,4 +1,8 @@
 module.exports = {
+    CONFIG: {
+        Admin_Email: 'nhlong2@tma.com.vn'
+    },
+
     TABLE: {
         Product: 'product',
         User: 'public.user'

@@ -11,19 +11,24 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
   button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent')
     span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
-    ul.navbar-nav.mr-auto
-      li.nav-item.active
-        a.nav-link(href='/')
-          | Home 
-          span.sr-only (current)
-      li.nav-item
-        a.nav-link(href='/products') Products
-      li.nav-item.dropdown
-        a.nav-link.dropdown-toggle(href='' data-toggle='dropdown' role='button')
-          | Sort
-        .dropdown-menu
-          a.dropdown-item(href='/?sort=price&order=asc') Price ASC
-          a.dropdown-item(href='/?sort=price&order=desc') Price DESC
+    - if(session.isAdmin)
+      ul.navbar-nav.mr-auto
+        li.nav-item.active
+          a.nav-link(href='/')
+            | Home 
+            span.sr-only (current)
+        li.nav-item
+          a.nav-link(href='/chat') Chat
+        li.nav-item
+          a.nav-link(href='/products') Products
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle(href='' data-toggle='dropdown' role='button')
+            | Sort
+          .dropdown-menu
+            a.dropdown-item(href='/?sort=price&order=asc') Price ASC
+            a.dropdown-item(href='/?sort=price&order=desc') Price DESC
+    - else
+      ul.navbar-nav.mr-auto
     ul.navbar-nav
       li.nav-item
         a.nav-link(href='/shopping-carts')
@@ -31,8 +36,9 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
           |  Shopping Cart 
           span#shoppingCartBadge.badge.badge-secondary #{session.cart ? session.cart.totalQty : ''}
       li.nav-item.dropdown
-        a#userManagement.nav-link.dropdown-toggle(href='' data-toggle='dropdown' role='button')
-          | #{session.currentUser ? session.currentUser : ' User Management'}
+        a.nav-link.dropdown-toggle(href='' data-toggle='dropdown' role='button')
+          i.fas.fa-user
+          span#userManagement  #{session.currentUser ? session.currentUser : ' User Management'}
         .dropdown-menu
           - if(login) {
             a.dropdown-item(href='/users/profile') User Account

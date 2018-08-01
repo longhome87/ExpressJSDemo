@@ -4,6 +4,7 @@ const csrf = require('csurf');
 const csrfProtection = csrf();
 const passport = require('passport');
 const authenticate = require('../security/authenticate');
+const COMMON = require('../common');
 
 router.use(csrfProtection);
 
@@ -13,6 +14,7 @@ router.get('/profile', authenticate.isLoggedIn, function (req, res, next) {
 
 router.get('/logout', authenticate.isLoggedIn, function (req, res, next) {
     req.session.currentUser = null;
+    req.session.isAdmin = null;
     req.logout();
     res.redirect('/');
 });
@@ -57,6 +59,7 @@ router.post('/signin', passport.authenticate('local.signin', {
     failureFlash: true
 }), function (req, res, next) {
     req.session.currentUser = req.body.txtEmail;
+    req.session.isAdmin = req.body.txtEmail == COMMON.CONFIG.Admin_Email;
     if (req.session.oldUrl) {
         let oldUrl = req.session.oldUrl;
         req.session.oldUrl = null;
