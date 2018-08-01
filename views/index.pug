@@ -7,14 +7,15 @@ block content
         .product-item-container.col-xl-3.col-lg-4.col-md-6
           .card
             .product-item
-              img.card-img-top(src='uploads/' + row.image)
+              a(data-fancybox='' href='uploads/' + row.image)
+                img.card-img-top(src='uploads/' + row.image)
             .card-body
               h5.card-title #{row.name}
               p.card-text
                 | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
-              h4.product-price.float-left #{row.price}
+              //- let price = parseInt(row.price).toLocaleString('vn-VN', { style: 'currency', currency: 'VND' });
+              - let price = parseInt(row.price).toLocaleString('vn-VN');
+              h4.product-price.float-left #{price.replace(',','.')}
                 span 
                   u đ
-              //- a.btn.btn-success.float-right(href='/shopping-carts/add-to-cart/' + row.id) Add To Cart
               a#btnAddToCart(href='' role='button' onclick='return addToCart(' + row.id + ');').btn.btn-success.float-right Add To Cart
-
