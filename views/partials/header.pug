@@ -38,7 +38,8 @@ nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
       li.nav-item.dropdown
         a.nav-link.dropdown-toggle(href='' data-toggle='dropdown' role='button')
           i.fas.fa-user
-          span#userManagement  #{session.currentUser ? session.currentUser : ' User Management'}
+          |  
+          span#userManagement #{session.currentUser ? session.currentUser : ' User Management'}
         .dropdown-menu
           - if(login) {
             a.dropdown-item(href='/users/profile') User Account
