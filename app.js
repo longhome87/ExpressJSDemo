@@ -27,6 +27,7 @@ const shoppingCartRouter = require('./routes/shopping-carts');
 const chatRouter = require('./routes/chat');
 
 const productAPI = require('./routes/api/products');
+const userAPI = require('./routes/api/users');
 
 const app = express();
 
@@ -70,6 +71,7 @@ app.use('/shopping-carts', shoppingCartRouter);
 app.use('/chat', chatRouter);
 
 app.use('/api/products', productAPI);
+app.use('/api/users', userAPI);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

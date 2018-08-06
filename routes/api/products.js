@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
             res.send(result.rows);
         })
         .catch(err => {
-            next(err);
+            res.status(500).send(err);
         });
 });
 
@@ -28,13 +28,13 @@ router.get('/:id', function (req, res, next) {
             res.send(row);
         })
         .catch(err => {
-            next(err);
+            res.status(500).send(err);
         });
 });
 
 router.post('/', function (req, res, next) {
     if (!req.files) {
-        return res.status(400).json({ 'message': 'No files were uploaded.' });
+        return res.status(400).send({ 'message': 'No files were uploaded.' });
     }
 
     let name = req.body.txtName;
@@ -62,11 +62,11 @@ router.post('/', function (req, res, next) {
                     res.send(row)
                 })
                 .catch(e => {
-                    next(e)
+                    res.status(500).send(e);
                 });
         })
         .catch(err => {
-            next(err);
+            res.status(500).send(err);
         });
 });
 
@@ -88,11 +88,11 @@ router.put('/:id', function (req, res, next) {
                     res.send(row)
                 })
                 .catch(e => {
-                    next(e)
+                    res.status(500).send(e);
                 });
         })
         .catch(err => {
-            next(err);
+            res.status(500).send(err);
         });
 });
 
@@ -115,11 +115,11 @@ router.delete('/:id', function (req, res, next) {
                     res.send(true);
                 })
                 .catch(err => {
-                    next(err);
+                    res.status(500).send(err);
                 });
         })
         .catch(e => {
-            next(e)
+            res.status(500).send(e);
         });
 });
 

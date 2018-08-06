@@ -55,36 +55,19 @@ router.get('/signin', function (req, res, next) {
     });
 });
 
-router.post('/signin', function (req, res, next) {
-
-    // passport.authenticate('local.signin', { session: false }, function (err, user, info) {
-    //     console.log(err);
-    //     console.log(user);
-    //     console.log(info);
-    // });
-
-    passport.authenticate('local.signin', function (err, user, info) {
-        if (err) { return next(err); }
-        if (!user) {
-            // return res.redirect('/login');
-            return res.json({ status: false });
-        }
-        req.logIn(user, function (err) {
-            if (err) { return next(err); }
-            // return res.redirect('/users/' + user.username);
-            return res.json({ status: true });
-        });
-    })(req, res, next);
-
-    // req.session.currentUser = req.body.txtEmail;
-    // req.session.isAdmin = req.body.txtEmail == COMMON.CONFIG.Admin_Email;
-    // if (req.session.oldUrl) {
-    //     let oldUrl = req.session.oldUrl;
-    //     req.session.oldUrl = null;
-    //     res.redirect(oldUrl);
-    // } else {
-    //     res.redirect('/users/profile');
-    // }
+router.post('/signin', passport.authenticate('local.signin', {
+    failureRedirect: '/users/signin',
+    failureFlash: true
+}), function (req, res, next) {
+    req.session.currentUser = req.body.txtEmail;
+    req.session.isAdmin = req.body.txtEmail == COMMON.CONFIG.Admin_Email;
+    if (req.session.oldUrl) {
+        let oldUrl = req.session.oldUrl;
+        req.session.oldUrl = null;
+        res.redirect(oldUrl);
+    } else {
+        res.redirect('/users/profile');
+    }
 });
 
 module.exports = router;

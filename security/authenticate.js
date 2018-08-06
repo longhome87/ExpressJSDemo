@@ -24,6 +24,16 @@ class Authenticate {
         req.session.oldUrl = routeName;
         res.redirect('/users/signin');
     };
+
+    static isLoggedInAPI(req, res, next) {
+        if (req.isAuthenticated()) {
+            return next();
+        }
+
+        res.status(401).send({
+            messages: 'You must loging in first!'
+        });
+    };
 }
 
 module.exports = Authenticate;
