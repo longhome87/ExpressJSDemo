@@ -18,6 +18,7 @@ const pgPool = new pg.Pool({
     connectionString: config.connectionString
 });
 require('./config/passport');
+const cors = require('cors');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -30,6 +31,8 @@ const productAPI = require('./routes/api/products');
 const userAPI = require('./routes/api/users');
 
 const app = express();
+
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
