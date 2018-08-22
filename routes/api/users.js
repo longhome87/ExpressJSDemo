@@ -43,24 +43,20 @@ router.get('/:id', function (req, res, next) {
 router.post('/signin', function (req, res, next) {
     passport.authenticate('local.signin', function (err, user, info) {
         if (err) {
-            return res.status(500).send({
-                messages: err
-            });
+            return res.status(500).send(err);
         }
 
         if (!user) {
             let messages = req.flash('error');
             return res.send({
                 messages: messages,
-                hasErrors: messages.length > 0
+                hasError: messages.length > 0
             });
         }
 
         req.logIn(user, function (err) {
             if (err) {
-                return res.status(500).send({
-                    messages: err
-                });
+                return res.status(500).send(err);
             }
 
             return res.send(user);
@@ -71,27 +67,29 @@ router.post('/signin', function (req, res, next) {
 router.post('/signup', function (req, res, next) {
     passport.authenticate('local.signup', function (err, user, info) {
         if (err) {
-            return res.status(500).send({
-                messages: err
-            });
+            return res.status(500).send(err);
         }
 
         if (!user) {
             let messages = req.flash('error');
             return res.send({
                 messages: messages,
-                hasErrors: messages.length > 0
+                hasError: messages.length > 0
             });
         }
 
         req.logIn(user, function (err) {
             if (err) {
-                return res.status(500).send({
-                    messages: err
-                });
+                return res.status(500).send(err);
             }
 
-            return res.send(user);
+            UserService.findById(user.id)
+                .then(result => {
+                    return res.send(result.rows[0])
+                })
+                .catch(err => {
+                    return res.status(500).send(err);
+                });
         });
     })(req, res, next);
 });
