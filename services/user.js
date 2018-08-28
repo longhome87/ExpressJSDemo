@@ -29,6 +29,11 @@ class UserService {
     validPassword(password, encryptedPassword) {
         return BCRYPT.compareSync(password, encryptedPassword);
     }
+
+    deleteOne(id) {
+        var command = UTIL.format("DELETE FROM %s WHERE Id = %s", USER_TABLE_NAME, id);
+        return DB.execute(command);
+    }
 }
 
 module.exports = new UserService();

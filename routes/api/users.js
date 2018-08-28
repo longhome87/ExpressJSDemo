@@ -94,4 +94,23 @@ router.post('/signup', function (req, res, next) {
     })(req, res, next);
 });
 
+router.delete('/:id', function (req, res, next) {
+    let userId = req.params.id;
+    UserService
+        .findById(userId)
+        .then(data => {
+            UserService
+                .deleteOne(userId)
+                .then(result => {
+                    res.send(true);
+                })
+                .catch(err => {
+                    res.status(500).send(err);
+                });
+        })
+        .catch(e => {
+            res.status(500).send(e);
+        });
+});
+
 module.exports = router;

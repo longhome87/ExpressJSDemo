@@ -8,7 +8,10 @@ const pool = new Pool({
 
 module.exports = {
     execute: (command) => {
-        console.log('QUERY: ', command);
+        if (process.env.NODE_ENV !== 'test') {
+            console.log('QUERY: ', command);
+        }
+
         return pool.query(command);
     }
 }

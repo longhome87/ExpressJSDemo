@@ -4,5 +4,8 @@
     },
     "production": {
         "connectionString": "postgres://ingcqhvoglcpdz:df5b4154f21c20d23f1d3ed73aba3b5be0b32ac6eac04ed2a8216c5de4588e88@ec2-107-22-241-243.compute-1.amazonaws.com:5432/d3g2fc9gmlifcp"
+    },
+    "test": {
+        "connectionString": "postgresql://postgres:postgres@localhost:5432/minishop_test"
     }
 }

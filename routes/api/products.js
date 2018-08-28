@@ -24,6 +24,10 @@ router.get('/:id', function (req, res, next) {
         .findById(productId)
         .then(result => {
             let row = result.rows[0];
+            if (!row) {
+                return res.status(404).send({ 'message': 'Not found product with id ' + productId });
+            }
+
             row.image = HELPER.getFullImagePath(req, row.image);
             res.send(row);
         })
@@ -59,7 +63,7 @@ router.post('/', function (req, res, next) {
                 .then(data => {
                     let row = data.rows[0];
                     row.image = HELPER.getFullImagePath(req, row.image);
-                    res.send(row)
+                    res.status(201).send(row)
                 })
                 .catch(e => {
                     res.status(500).send(e);
