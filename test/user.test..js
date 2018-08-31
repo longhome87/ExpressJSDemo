@@ -133,6 +133,7 @@ describe('USER', () => {
                     if (err) { done(err); }
 
                     res.should.have.status(200);
+                    // res.body.should.have.property('id', 0);
                     res.body.should.have.property('id', newUserId);
                     done();
                 });

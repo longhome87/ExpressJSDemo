@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.24600000000000002" tests="20" failures="0">
+  <testsuite name="Root Suite" timestamp="2018-08-31T10:33:31" tests="0" failures="0" time="0">
+  </testsuite>
+  <testsuite name="PRODUCT" timestamp="2018-08-31T10:33:31" tests="0" file="D:\Technical\NodeJS\ExpressApplicationGenerator\myapp\test\product.test.js" failures="0" time="0">
+  </testsuite>
+  <testsuite name="/ADD product" timestamp="2018-08-31T10:33:31" tests="2" file="D:\Technical\NodeJS\ExpressApplicationGenerator\myapp\test\product.test.js" failures="0" time="0.095">
+    <testcase name="PRODUCT /ADD product it should add new product success" time="0.087" classname="it should add new product success">
+    </testcase>
+    <testcase name="PRODUCT /ADD product it should return 400 error for given missing image" time="0.008" classname="it should return 400 error for given missing image">
+    </testcase>
+  </testsuite>
+  <testsuite name="/GET product by id" timestamp="2018-08-31T10:33:31" tests="2" file="D:\Technical\NodeJS\ExpressApplicationGenerator\myapp\test\product.test.js" failures="0" time="0.012">
+    <testcase name="PRODUCT /GET product by id it should get product success for given existing id" time="0.008" classname="it should get product success for given existing id">
+    </testcase>
+    <testcase name="PRODUCT /GET product by id it should return 404 error for given NOT existing id" time="0.004" classname="it should return 404 error for given NOT existing id">
+    </testcase>
+  </testsuite>
+  <testsuite name="/GET products" timestamp="2018-08-31T10:33:31" tests="1" file="D:\Technical\NodeJS\ExpressApplicationGenerator\myapp\test\product.test.js" failures="0" time="0.005">
+    <testcase name="PRODUCT /GET products it should get all the products" time="0.005" classname="it should get all the products">
+    </testcase>
+  </testsuite>
+  <testsuite name="/UPDATE product" timestamp="2018-08-31T10:33:31" tests="2" file="D:\Technical\NodeJS\ExpressApplicationGenerator\myapp\test\product.test.js" failures="0" time="0.013000000000000001">
+    <testcase name="PRODUCT /UPDATE product it should return update success for given existing id" time="0.007" classname="it should return update success for given existing id">
+    </testcase>
+    <testcase name="PRODUCT /UPDATE product it should return 500 error for given NOT existing id" time="0.006" classname="it should return 500 error for given NOT existing id">
+    </testcase>
+  </testsuite>
+  <testsuite name="/DELETE product by id" timestamp="2018-08-31T10:33:31" tests="2" file="D:\Technical\NodeJS\ExpressApplicationGenerator\myapp\test\product.test.js" failures="0" time="0.01">
+    <testcase name="PRODUCT /DELETE product by id it should delete success for given existing id" time="0.006" classname="it should delete success for given existing id">
+    </testcase>
+    <testcase name="PRODUCT /DELETE product by id it should return 500 err for given NOT existing id" time="0.004" classname="it should return 500 err for given NOT existing id">
+    </testcase>
+  </testsuite>
+  <testsuite name="USER" timestamp="2018-08-31T10:33:31" tests="0" file="D:\Technical\NodeJS\ExpressApplicationGenerator\myapp\test\user.test..js" failures="0" time="0">
+  </testsuite>
+  <testsuite name="/POST signup" timestamp="2018-08-31T10:33:31" tests="3" file="D:\Technical\NodeJS\ExpressApplicationGenerator\myapp\test\user.test..js" failures="0" time="0.058">
+    <testcase name="USER /POST signup it should return message: Must be at least 3 chars long." time="0.026" classname="it should return message: Must be at least 3 chars long.">
+    </testcase>
+    <testcase name="USER /POST signup it should return message: Invalid email format." time="0.007" classname="it should return message: Invalid email format.">
+    </testcase>
+    <testcase name="USER /POST signup it should sign up success" time="0.025" classname="it should sign up success">
+    </testcase>
+  </testsuite>
+  <testsuite name="/POST signin" timestamp="2018-08-31T10:33:31" tests="4" file="D:\Technical\NodeJS\ExpressApplicationGenerator\myapp\test\user.test..js" failures="0" time="0.032">
+    <testcase name="USER /POST signin it should return message: No user found." time="0.007" classname="it should return message: No user found.">
+    </testcase>
+    <testcase name="USER /POST signin it should return message: Must be at least 3 chars long." time="0.006" classname="it should return message: Must be at least 3 chars long.">
+    </testcase>
+    <testcase name="USER /POST signin it should return message: Invalid email format." time="0.006" classname="it should return message: Invalid email format.">
+    </testcase>
+    <testcase name="USER /POST signin it should sign in success" time="0.013" classname="it should sign in success">
+    </testcase>
+  </testsuite>
+  <testsuite name="/GET product by id" timestamp="2018-08-31T10:33:32" tests="2" file="D:\Technical\NodeJS\ExpressApplicationGenerator\myapp\test\user.test..js" failures="0" time="0.008">
+    <testcase name="USER /GET product by id it should get user success for given existing id" time="0.004" classname="it should get user success for given existing id">
+    </testcase>
+    <testcase name="USER /GET product by id it should return 404 error for given NOT existing id" time="0.004" classname="it should return 404 error for given NOT existing id">
+    </testcase>
+  </testsuite>
+  <testsuite name="/DELETE user by id" timestamp="2018-08-31T10:33:32" tests="2" file="D:\Technical\NodeJS\ExpressApplicationGenerator\myapp\test\user.test..js" failures="0" time="0.013000000000000001">
+    <testcase name="USER /DELETE user by id it should delete success for given existing id" time="0.008" classname="it should delete success for given existing id">
+    </testcase>
+    <testcase name="USER /DELETE user by id it should delete success for given NOT existing id" time="0.005" classname="it should delete success for given NOT existing id">
+    </testcase>
+  </testsuite>
+</testsuites>

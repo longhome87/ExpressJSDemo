@@ -5,7 +5,10 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "test": "mocha"
+    "test": "mocha",
+    "report-html": "mocha -R mochawesome --reporter-options reportDir=./test/results/mochawesome",
+    "report-xml": "mocha -R mocha-junit-reporter --reporter-options mochaFile=./test/results/mocha-junit-reporter/test-results.xml",
+    "coverage": "nyc mocha"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -30,6 +33,9 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "mocha-junit-reporter": "^1.18.0",
+    "mochawesome": "^3.0.3",
+    "nyc": "^13.0.1"
   }
 }

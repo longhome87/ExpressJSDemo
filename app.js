@@ -37,7 +37,7 @@ app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV && process.env.NODE_ENV !== 'test') {
     app.use(express.logger());
 }
 // app.use(logger('dev'));

@@ -112,7 +112,7 @@ router.delete('/:id', function (req, res, next) {
                     if (imageName) {
                         let imagePath = 'public/uploads/' + imageName;
                         if (fs.existsSync(imagePath)) {
-                            fs.unlink(imagePath);
+                            fs.unlinkSync(imagePath);
                         }
                     }
 
