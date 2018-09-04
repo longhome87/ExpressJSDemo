@@ -19,13 +19,17 @@ describe('USER', () => {
     const NO_USER_FOUND_EMAIL = 'nouseremail@mochajs.com';
     const INVALID_EMAIL = 'testing@mochajs';
     const INVALID_PASSWORD = '12';
+    const INVALID_PASSWORD_2 = '1234';
+    const EXISTING_EMAIL = 'existingemail@mochajs.com';
     const VALID_EMAIL = 'testing@mochajs.org';
     const VALID_PASSWORD = '1245678x@X';
 
     const ERROR_MESSAGES = {
         'NO_USER_FOUND': 'No user found.',
         'MUST_BE_AT_LEAST_3_CHARS_LONG': 'Must be at least 3 chars long.',
-        'INVALID_EMAIL_FORMAT': 'Invalid email format.'
+        'INVALID_EMAIL_FORMAT': 'Invalid email format.',
+        'WRONG_PASSWORD': 'Wrong password.',
+        'EMAIL_IS_ALREADY_IN_USE': 'Email is already in use.'
     };
 
     describe('/POST signup', () => {
@@ -52,6 +56,19 @@ describe('USER', () => {
 
                     res.should.have.status(200);
                     res.body.messages[0].should.equal(ERROR_MESSAGES.INVALID_EMAIL_FORMAT);
+                    done();
+                });
+        });
+        it('it should return message: ' + ERROR_MESSAGES.EMAIL_IS_ALREADY_IN_USE, (done) => {
+            chai.request(server)
+                .post(API.USERS + '/signup')
+                .field('txtEmail', EXISTING_EMAIL)
+                .field('txtPassword', VALID_PASSWORD)
+                .end((err, res) => {
+                    if (err) { done(err); }
+
+                    res.should.have.status(200);
+                    res.body.messages[0].should.equal(ERROR_MESSAGES.EMAIL_IS_ALREADY_IN_USE);
                     done();
                 });
         });
@@ -107,6 +124,19 @@ describe('USER', () => {
 
                     res.should.have.status(200);
                     res.body.messages[0].should.equal(ERROR_MESSAGES.INVALID_EMAIL_FORMAT);
+                    done();
+                });
+        });
+        it('it should return message: ' + ERROR_MESSAGES.WRONG_PASSWORD, (done) => {
+            chai.request(server)
+                .post(API.USERS + '/signin')
+                .field('txtEmail', EXISTING_EMAIL)
+                .field('txtPassword', INVALID_PASSWORD_2)
+                .end((err, res) => {
+                    if (err) { done(err); }
+
+                    res.should.have.status(200);
+                    res.body.messages[0].should.equal(ERROR_MESSAGES.WRONG_PASSWORD);
                     done();
                 });
         });
